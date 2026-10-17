@@ -33,7 +33,7 @@ html, body { margin: 0; padding: 0; }
 html { background: var(--bg); overscroll-behavior-y: none; -webkit-text-size-adjust: 100%; }
 body {
   min-height: 100dvh;
-  background: var(--bg);
+  background: transparent; /* <html> paints the navy; a body colour would cover .backdrop */
   color: var(--ink);
   font-family: var(--body);
   -webkit-font-smoothing: antialiased;
@@ -52,11 +52,11 @@ img { display: block; max-width: 100%; }
   position: fixed; inset: 0; z-index: -1;
   background:
     radial-gradient(120% 60% at 50% 0%, rgba(29, 95, 184, 0.28), transparent 60%),
-    linear-gradient(to bottom, rgba(6, 13, 28, 0.25) 0%, rgba(6, 13, 28, 0.7) 26%, rgba(6, 13, 28, 0.93) 48%, var(--bg) 70%),
+    linear-gradient(to bottom, rgba(6, 13, 28, 0.12) 0%, rgba(6, 13, 28, 0.42) 24%, rgba(6, 13, 28, 0.72) 46%, rgba(6, 13, 28, 0.84) 72%, rgba(6, 13, 28, 0.9) 100%),
     url("../assets/arena.jpg") center top / cover no-repeat;
   background:
     radial-gradient(120% 60% at 50% 0%, rgba(29, 95, 184, 0.28), transparent 60%),
-    linear-gradient(to bottom, rgba(6, 13, 28, 0.25) 0%, rgba(6, 13, 28, 0.7) 26%, rgba(6, 13, 28, 0.93) 48%, var(--bg) 70%),
+    linear-gradient(to bottom, rgba(6, 13, 28, 0.12) 0%, rgba(6, 13, 28, 0.42) 24%, rgba(6, 13, 28, 0.72) 46%, rgba(6, 13, 28, 0.84) 72%, rgba(6, 13, 28, 0.9) 100%),
     image-set(url("../assets/arena.webp") type("image/webp"), url("../assets/arena.jpg") type("image/jpeg")) center top / cover no-repeat;
 }
 
@@ -79,6 +79,7 @@ img { display: block; max-width: 100%; }
 .brand-sub {
   margin-top: 3px; font-size: 10.5px; font-weight: 700; letter-spacing: 0.32em;
   text-transform: uppercase; color: var(--muted);
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.8);
 }
 
 .offline-chip {
@@ -149,7 +150,8 @@ img { display: block; max-width: 100%; }
   margin: 0; font-family: var(--display); font-weight: 800; font-style: italic;
   font-size: 34px; line-height: 1; text-transform: uppercase; letter-spacing: 0.01em;
 }
-.panel-head p { margin: 4px 0 0; font-size: 13px; color: var(--muted); }
+.panel-head p { margin: 4px 0 0; font-size: 13px; color: var(--muted); text-shadow: 0 1px 8px rgba(0, 0, 0, 0.8); }
+.panel-head h2 { text-shadow: 0 2px 14px rgba(0, 0, 0, 0.55); }
 .panel.is-active { animation: panelIn 0.28s ease both; }
 @keyframes panelIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
 
