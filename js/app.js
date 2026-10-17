@@ -213,7 +213,8 @@ function makeRow(track) {
   return b;
 }
 
-HYPE.forEach((t, i) => $('#hypeGrid').append(makePad(t, i)));
+const padBySrc = new Map();
+HYPE.forEach((t, i) => { const p = makePad(t, i); padBySrc.set(t.src, p); $('#hypeGrid').append(p); });
 FULL.forEach((t) => $('#fullList').append(makeRow(t)));
 
 // Tabs
@@ -297,6 +298,29 @@ goalBtn.addEventListener('click', goal);
 tegenBtn.addEventListener('click', tegengoal);
 
 /* =========================================================
+   Shuffle: random Hype snippet (never the goal song, no repeats until
+   every snippet has had a turn)
+   ========================================================= */
+const shuffleBtn = $('#shuffleBtn');
+const goalSrcs = new Set(GOAL_LIST.map((t) => t.src));
+const hypePool = HYPE.filter((t) => !goalSrcs.has(t.src));
+const pickHype = picker(hypePool);
+let lastShuffle = 0;
+
+function shuffleHype() {
+  const now = Date.now();
+  if (now - lastShuffle < 350) return; // accidental double tap
+  lastShuffle = now;
+  let t = pickHype();
+  if (current && current.track.src === t.src && hypePool.length > 1) t = pickHype();
+  const pad = padBySrc.get(t.src);
+  play(t, pad || shuffleBtn, 'pad');
+  shuffleBtn.classList.remove('is-spin'); void shuffleBtn.offsetWidth; shuffleBtn.classList.add('is-spin');
+  if (pad && !$('#panel-hype').hidden) pad.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+}
+shuffleBtn.addEventListener('click', shuffleHype);
+
+/* =========================================================
    Now playing + render loop
    ========================================================= */
 const nowEl = $('#now');
@@ -362,11 +386,12 @@ function tick() {
 $('#fadeBtn').addEventListener('click', fadeOut);
 $('#stopBtn').addEventListener('click', () => stop(0.08));
 
-// Keyboard (laptop at the scorer's table): G = goal, T = tegengoal, F = fade, Esc/Space = stop
+// Keyboard (laptop at the scorer's table): G = goal, T = tegengoal, R = shuffle hype, F = fade, Esc/Space = stop
 document.addEventListener('keydown', (e) => {
   if (e.target.closest('input, textarea') || e.metaKey || e.ctrlKey || e.altKey) return;
   if (e.key === 'g' || e.key === 'G') { e.preventDefault(); goal(); }
   else if (e.key === 't' || e.key === 'T') { e.preventDefault(); tegengoal(); }
+  else if (e.key === 'r' || e.key === 'R') { e.preventDefault(); shuffleHype(); }
   else if (e.key === 'f' || e.key === 'F') { e.preventDefault(); fadeOut(); }
   else if (e.key === 'Escape' || (e.key === ' ' && e.target === document.body)) { e.preventDefault(); stop(0.08); }
 });
@@ -528,4 +553,4 @@ refreshOffline();
 window.addEventListener('load', () => setTimeout(warmEssentials, 800));
 
 // Expose for debugging
-window.__lxd = { play, stop, fadeOut, goal, tegengoal, get current() { return current; } };
+window.__lxd = { play, stop, fadeOut, goal, tegengoal, shuffleHype, get current() { return current; } };

@@ -38,11 +38,17 @@
     </button>
   </header>
 
-  <nav class="tabs" role="tablist" aria-label="Categorieën">
-    <div class="tabs-track" style="--n: 2">
-      <span class="tab-indicator" aria-hidden="true"></span>
-      <button class="tab is-active" role="tab" aria-selected="true" aria-controls="panel-hype" id="tab-hype" data-panel="hype">Hype</button>
-      <button class="tab" role="tab" aria-selected="false" aria-controls="panel-full" id="tab-full" data-panel="full">Volledige nummers</button>
+  <nav class="tabs" aria-label="Categorieën">
+    <div class="tabs-row">
+      <div class="tabs-track" role="tablist" style="--n: 2">
+        <span class="tab-indicator" aria-hidden="true"></span>
+        <button class="tab is-active" role="tab" aria-selected="true" aria-controls="panel-hype" id="tab-hype" data-panel="hype">Hype</button>
+        <button class="tab" role="tab" aria-selected="false" aria-controls="panel-full" id="tab-full" data-panel="full">Volledige nummers</button>
+      </div>
+      <button class="shuffle" id="shuffleBtn" type="button" aria-label="Speel een willekeurig hype-nummer">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h3.5c2 0 3.2.9 4.3 2.6l2.4 3.8c1.1 1.7 2.3 2.6 4.3 2.6H21m0 0-3-3m3 3-3 3M3 17h3.5c1.4 0 2.4-.5 3.2-1.3M21 7h-3.5c-1.4 0-2.4.5-3.2 1.3M21 7l-3-3m3 3-3 3"/></svg>
+        <span>Shuffle</span>
+      </button>
     </div>
   </nav>
 
