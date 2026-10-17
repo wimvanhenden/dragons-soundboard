@@ -214,7 +214,8 @@ function makeRow(track) {
 }
 
 const padBySrc = new Map();
-HYPE.forEach((t, i) => { const p = makePad(t, i); padBySrc.set(t.src, p); $('#hypeGrid').append(p); });
+// Hype pads come in a new random order every time the app opens (numbered by position).
+shuffled(HYPE).forEach((t, i) => { const p = makePad(t, i); padBySrc.set(t.src, p); $('#hypeGrid').append(p); });
 FULL.forEach((t) => $('#fullList').append(makeRow(t)));
 
 // Tabs
