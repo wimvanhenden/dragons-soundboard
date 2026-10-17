@@ -1,0 +1,9 @@
+# Audio lives in S3 (ghentdragons.soundboard), not in git
+snippets/
+original/
+*.mp3
+
+# Logo of the previous version of the site
+/logo.jpg
+
+.DS_Store

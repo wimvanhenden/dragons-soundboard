@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Lions × Dragons Soundboard</title>
+  <meta name="description" content="Soundboard voor de Lions en de Ghent Dragons">
+  <meta name="theme-color" content="#060d1c">
+  <!-- where the mp3 folders live, relative to this page ("" = next to index.html) -->
+  <meta name="lxd-audio-base" content="">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Lions × Dragons">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32.png">
+  <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
+  <link rel="preload" href="assets/fonts/barlow-condensed-latin-800-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+  <div class="backdrop" aria-hidden="true"></div>
+
+  <header class="top">
+    <div class="brand">
+      <div class="brand-logos">
+        <img class="lion" src="assets/lions-logo.webp" alt="Lions" width="335" height="360">
+        <img class="dragon" src="assets/dragons-logo.webp" alt="Ghent Dragons" width="329" height="360">
+      </div>
+      <div class="brand-text">
+        <span class="brand-name">Lions <b>×</b> Dragons</span>
+        <span class="brand-sub">Soundboard</span>
+      </div>
+    </div>
+    <button class="offline-chip" id="offlineChip" type="button" aria-haspopup="dialog">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v11m0 0 4-4m-4 4-4-4M5 17v2a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-2"/></svg>
+      <span id="offlineChipText">Offline</span>
+    </button>
+  </header>
+
+  <nav class="tabs" role="tablist" aria-label="Categorieën">
+    <div class="tabs-track" style="--n: 2">
+      <span class="tab-indicator" aria-hidden="true"></span>
+      <button class="tab is-active" role="tab" aria-selected="true" aria-controls="panel-hype" id="tab-hype" data-panel="hype">Hype</button>
+      <button class="tab" role="tab" aria-selected="false" aria-controls="panel-full" id="tab-full" data-panel="full">Volledige nummers</button>
+    </div>
+  </nav>
+
+  <main class="panels">
+    <section class="panel is-active" id="panel-hype" role="tabpanel" aria-labelledby="tab-hype">
+      <div class="panel-head">
+        <h2>Hype</h2>
+        <p>Face-offs, time-outs &amp; onderbrekingen</p>
+      </div>
+      <div class="grid" id="hypeGrid"></div>
+    </section>
+
+    <section class="panel" id="panel-full" role="tabpanel" aria-labelledby="tab-full" hidden>
+      <div class="panel-head">
+        <h2>Volledige nummers</h2>
+        <p>Opwarming &amp; pauzes</p>
+      </div>
+      <div class="list" id="fullList"></div>
+    </section>
+  </main>
+
+  <div class="dock">
+    <div class="now" id="now" hidden>
+      <div class="now-main">
+        <span class="eq" aria-hidden="true"><i></i><i></i><i></i></span>
+        <div class="now-text">
+          <span class="now-title" id="nowTitle"></span>
+          <span class="now-artist" id="nowArtist"></span>
+        </div>
+        <button class="ctl ctl--fade" id="fadeBtn" type="button">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4Z"/><path class="w" d="M16.5 8.5 21 4M16.5 15.5 21 20"/></svg>
+          <span>Uitfaden</span>
+        </button>
+        <button class="ctl ctl--stop" id="stopBtn" type="button" aria-label="Stop">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="6" width="12" height="12" rx="2"/></svg>
+        </button>
+      </div>
+      <div class="now-progress">
+        <span class="time" id="nowElapsed">0:00</span>
+        <div class="bar"><span id="nowBar"></span></div>
+        <span class="time" id="nowRemain">-0:00</span>
+      </div>
+    </div>
+
+    <div class="scorebar">
+      <button class="score score--us" id="goalBtn" type="button" aria-label="Goal! Wij scoren">
+        <span class="score-shine" aria-hidden="true"></span>
+        <span class="score-label">Goal!</span>
+        <span class="score-sub" data-idle="Wij scoren">Wij scoren</span>
+        <span class="score-progress" aria-hidden="true"><span></span></span>
+      </button>
+      <button class="score score--them" id="tegenBtn" type="button" aria-label="Tegengoal: zij scoren">
+        <span class="score-label">Tegen<wbr>goal</span>
+        <span class="score-sub" data-idle="Zij scoren">Zij scoren</span>
+        <span class="score-progress" aria-hidden="true"><span></span></span>
+      </button>
+    </div>
+  </div>
+
+  <div class="celebrate" id="celebrate" aria-hidden="true">
+    <div class="celebrate-burst"></div>
+    <div class="celebrate-row">
+      <img src="assets/lions-logo.webp" alt="">
+      <img src="assets/dragons-logo.webp" alt="">
+    </div>
+    <div class="celebrate-word">Goal!</div>
+  </div>
+
+  <div class="sheet-scrim" id="sheetScrim" hidden></div>
+  <section class="sheet" id="offlineSheet" role="dialog" aria-modal="true" aria-labelledby="sheetTitle" hidden>
+    <div class="sheet-grab" aria-hidden="true"></div>
+    <h3 id="sheetTitle">Offline gebruiken</h3>
+    <p class="sheet-lead">Bewaar de muziek op dit toestel. Dan werkt alles in de ijshal, ook zonder wifi of 4G.</p>
+    <div class="sheet-stat">
+      <span>Fragmenten</span><b id="statSnippets">–</b>
+    </div>
+    <div class="sheet-stat">
+      <span>Volledige nummers</span><b id="statFull">–</b>
+    </div>
+    <div class="sheet-progress" id="sheetProgress" hidden><span id="sheetBar"></span></div>
+    <button class="sheet-btn" id="downloadAll" type="button">Alles offline bewaren</button>
+    <p class="sheet-note" id="installNote">Tip: kies <b>Deel → Zet op beginscherm</b> om de soundboard als app te openen. Het scherm blijft aan zolang de app open is.</p>
+    <button class="sheet-close" id="sheetClose" type="button">Sluiten</button>
+  </section>
+
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
