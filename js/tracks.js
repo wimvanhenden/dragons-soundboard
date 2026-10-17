@@ -58,6 +58,11 @@ export const HYPE = [
   s('Baha Men', 'Who Let the Dogs Out', 'Baha Men - Who Let The Dogs Out (Official Video).mp3'),
   s('Chumbawamba', 'Tubthumping', 'Chumbawamba - Tubthumping.mp3'),
   s('The Fratellis', 'Chelsea Dagger', 'The Fratellis - Chelsea Dagger.mp3'),
+  s('DNCE', 'Cake by the Ocean', 'DNCE - Cake By The Ocean.mp3'),
+  s('Red Hot Chili Peppers', "Can't Stop", "Red Hot Chili Peppers - Can't Stop [Official Music Video].mp3"),
+  s('The Black Eyed Peas', "Let's Get It Started", "The Black Eyed Peas - Let's Get It Started.mp3"),
+  s('Walk the Moon', 'Shut Up and Dance', 'WALK THE MOON - Shut Up and Dance (Official Video).mp3'),
+  s('Years & Years', 'King', 'Years & Years - King (Official Video).mp3'),
 ];
 
 // Volledige nummers — opwarming & pauzes
