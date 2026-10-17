@@ -84,7 +84,7 @@ async function audio(event) {
   const req = event.request;
   const url = req.url.split('#')[0];
   const cache = await caches.open(AUDIO_CACHE);
-  const hit = await cache.match(url, { ignoreSearch: true, ignoreVary: true });
+  const hit = await cache.match(url, { ignoreVary: true }); // ?v=N marks a new cut
   if (hit) return rangeResponse(hit, req.headers.get('range'));
 
   event.waitUntil((async () => {

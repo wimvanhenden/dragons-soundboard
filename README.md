@@ -16,11 +16,12 @@ Live at **https://dragons.seeingisbelieving.be** (S3 bucket `ghentdragons.soundb
 
 Everything is in [`js/tracks.js`](js/tracks.js):
 
-- `GOAL_LIST` / `TEGENGOAL_LIST`: the songs for the two buttons. One song is fine.
-- `HYPE`: the snippet pads.
-- `FULL`: the full songs.
+- `GOAL_LIST`: songs for GOAL! (from `snippets/`). One song is fine.
+- `TEGENGOAL_LIST`: songs for TEGENGOAL (from `snippets/they_score/`). These don't appear under Hype.
+- `HYPE`: the snippet pads (from `snippets/`).
+- `FULL`: the full songs (from `original/`).
 
-The mp3s live in S3 under `snippets/` and `original/` and are not in git. To add a song, upload the mp3 to the bucket and add a line to `tracks.js`.
+The mp3s live in S3 under `snippets/`, `snippets/they_score/` and `original/` and are not in git. To add a song, upload the mp3 to the bucket and add a line to `tracks.js`. If you replace an mp3 with a new cut under the same name, add or raise the version number at the end of its line (for example `…mp3', 2)`) so phones that saved the old cut offline fetch the new one. Previous cuts are kept in S3 under `legacy/`.
 
 ## Files
 

@@ -472,11 +472,18 @@ async function downloadAll() {
   refreshOffline();
 }
 
-// Quietly keep the two most important songs on the device
+// Drop saved audio that is no longer in the lists (old cuts, removed songs)
+async function pruneAudio(cache) {
+  const keep = new Set(ALL_AUDIO.map(abs));
+  for (const req of await cache.keys()) if (!keep.has(req.url)) await cache.delete(req);
+}
+
+// Quietly keep the score-button songs on the device
 async function warmEssentials() {
   if (!('caches' in window)) return;
   try {
     const cache = await caches.open(AUDIO_CACHE);
+    await pruneAudio(cache);
     for (const src of ESSENTIALS) await cacheOne(cache, src);
   } catch (_) {}
   refreshOffline();

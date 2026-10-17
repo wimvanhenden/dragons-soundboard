@@ -1,10 +1,16 @@
 // Lions × Dragons soundboard — track list.
-// To add a song: drop the mp3 in snippets/ or original/ and add a line below.
-// `src` is the path relative to the site root (same as the S3 key).
+// To add a song: upload the mp3 to snippets/, snippets/they_score/ or original/
+// and add a line below. The file name is the S3 key inside that folder.
+//
+// Replaced an mp3 with a new cut under the same name? Add or raise the version
+// number at the end of its line (…, 2) so phones that saved the old cut
+// offline fetch the new one.
 
 const BASE = (typeof document !== 'undefined' && document.querySelector('meta[name="lxd-audio-base"]')?.content) || '';
-const s = (artist, title, file) => ({ artist, title, src: `${BASE}snippets/${file}` });
-const o = (artist, title, file) => ({ artist, title, src: `${BASE}original/${file}` });
+const track = (folder) => (artist, title, file, v) => ({ artist, title, src: `${BASE}${folder}${file}${v ? `?v=${v}` : ''}` });
+const s = track('snippets/');            // hype snippets
+const t = track('snippets/they_score/'); // tegengoal songs
+const o = track('original/');            // full songs
 
 // ── The two permanent buttons ─────────────────────────────
 // Each button plays a random song from its list (never the same one twice
@@ -15,30 +21,32 @@ export const GOAL_LIST = [
   s('Pennywise', 'Bro Hymn', 'Bro hymn-Pennywise.mp3'),
 ];
 
-// TEGENGOAL — zij scoren
+// TEGENGOAL — zij scoren (folder snippets/they_score/, not shown under Hype)
 export const TEGENGOAL_LIST = [
-  s('The Clash', 'I Fought the Law', 'The Clash - I Fought the Law.mp3'),
-  s('Ramones', 'Blitzkrieg Bop', 'Ramones - Blitzkrieg Bop.mp3'),
-  s('Arena-orgel', 'Hockey Organ 2', 'Hockey Arena Organ - 2.mp3'),
+  t('Aqua', 'Barbie Girl', 'Aqua - Barbie Girl (Official Music Video).mp3'),
+  t('Katy Perry ft. Snoop Dogg', 'California Gurls', 'Katy Perry - California Gurls (Official Music Video) ft. Snoop Dogg.mp3'),
+  t('Rick Astley', 'Never Gonna Give You Up', 'Rick Astley - Never Gonna Give You Up (Official Video) (4K Remaster).mp3'),
+  t('Shania Twain', 'Man! I Feel Like a Woman!', 'Shania Twain - Man! I Feel Like A Woman! (Official Music Video).mp3'),
+  t('Marco Borsato', 'Dromen Zijn Bedrog', 'Marco Borsato - Dromen Zijn Bedrog.mp3'),
 ];
 
 // Hype — face-offs, time-outs & onderbrekingen
 export const HYPE = [
-  s('AC/DC', 'Thunderstruck', 'AC DC - Thunderstruck.mp3'),
+  s('AC/DC', 'Thunderstruck', 'AC DC - Thunderstruck.mp3', 2),
   s('Avicii', 'Levels', 'Avicii - Levels.mp3'),
   s('Beastie Boys', 'Sabotage', 'Beastie Boys - Sabotage.mp3'),
-  s('Blur', 'Song 2', 'Blur - Song 2.mp3'),
+  s('Blur', 'Song 2', 'Blur - Song 2.mp3', 2),
   s('Pennywise', 'Bro Hymn', 'Bro hymn-Pennywise.mp3'),
-  s('Darude', 'Sandstorm', 'Darude - Sandstorm.mp3'),
-  s('Dimitri Vegas & Like Mike', 'The Hum', 'Dimitri Vegas - The Hum.mp3'),
-  s('DJ Snake & Lil Jon', 'Turn Down for What', 'DJ Snake, Lil Jon - Turn Down for What.mp3'),
+  s('Darude', 'Sandstorm', 'Darude - Sandstorm.mp3', 2),
+  s('Dimitri Vegas & Like Mike', 'The Hum', 'Dimitri Vegas - The Hum.mp3', 2),
+  s('DJ Snake & Lil Jon', 'Turn Down for What', 'DJ Snake, Lil Jon - Turn Down for What.mp3', 2),
   s('DVBBS & Borgeous', 'Tsunami', 'DVBBS & Borgeous - TSUNAMI.mp3'),
-  s("Guns N' Roses", 'Welcome to the Jungle', 'Guns N_ Roses - Welcome To The Jungle.mp3'),
+  s("Guns N' Roses", 'Welcome to the Jungle', 'Guns N_ Roses - Welcome To The Jungle.mp3', 2),
   s('Arena-orgel', 'Hockey Organ 1', 'Hockey Arena Organ - 1.mp3'),
   s('Arena-orgel', 'Hockey Organ 2', 'Hockey Arena Organ - 2.mp3'),
-  s('Dropkick Murphys', "I'm Shipping Up to Boston", 'I_m Shipping Up To Boston - Dropkick Murphys.mp3'),
-  s('Papa Roach', 'Last Resort', 'Last Resort - Papa Roach.mp3'),
-  s('Metallica', 'Enter Sandman', 'Metallica - Enter Sandman.mp3'),
+  s('Dropkick Murphys', "I'm Shipping Up to Boston", 'I_m Shipping Up To Boston - Dropkick Murphys.mp3', 2),
+  s('Papa Roach', 'Last Resort', 'Last Resort - Papa Roach.mp3', 2),
+  s('Metallica', 'Enter Sandman', 'Metallica - Enter Sandman.mp3', 2),
   s('Pantera', 'Cowboys from Hell', 'Pantera - Cowboys From Hell.mp3'),
   s('Ramones', 'Blitzkrieg Bop', 'Ramones - Blitzkrieg Bop.mp3'),
   s('Smash Mouth', 'All Star', 'Smash Mouth - All Star.mp3'),
@@ -46,6 +54,8 @@ export const HYPE = [
   s('The Clash', 'I Fought the Law', 'The Clash - I Fought the Law.mp3'),
   s('Wolfmother', 'Joker and the Thief', 'Wolfmother - Joker And The Thief.mp3'),
   s('Zombie Nation', 'Kernkraft 400', 'Zombie Nation - Kernkraft 400.mp3'),
+  s('Jimmy Frey', 'Saragossa', 'Jimmy Frey - Saragossa.mp3'),
+  s('Janez Detd.', 'Anti-Anthem', 'Janez Detd. - Anti-Anthem.mp3'),
 ];
 
 // Volledige nummers — opwarming & pauzes
