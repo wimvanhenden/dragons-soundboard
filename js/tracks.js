@@ -28,6 +28,7 @@ export const TEGENGOAL_LIST = [
   t('Rick Astley', 'Never Gonna Give You Up', 'Rick Astley - Never Gonna Give You Up (Official Video) (4K Remaster).mp3'),
   t('Shania Twain', 'Man! I Feel Like a Woman!', 'Shania Twain - Man! I Feel Like A Woman! (Official Music Video).mp3'),
   t('Marco Borsato', 'Dromen Zijn Bedrog', 'Marco Borsato - Dromen Zijn Bedrog.mp3'),
+  t('Durbuy', "J'aime J'aime Durbuy", "J'aime j'aime Durbuy - FULL & ORIGINAL VERSION !.mp3"),
 ];
 
 // Hype — face-offs, time-outs & onderbrekingen
