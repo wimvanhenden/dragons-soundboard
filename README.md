@@ -5,7 +5,7 @@ Live at **https://dragons.seeingisbelieving.be** (S3 bucket `ghentdragons.soundb
 
 ## What's in it
 
-- **GOAL!** (wij scoren) and **TEGENGOAL** (zij scoren): two buttons that are always on screen. Each plays a random song from its own list and never the same one twice in a row. GOAL! also shows a full-screen celebration.
+- **GOAL!** (wij scoren) and **TEGENGOAL** (zij scoren): two buttons that are always on screen. Each list is shuffled when the app opens and played in that order. Once every song has played, the list is reshuffled, and the new round never starts with the song that just played. GOAL! also shows a full-screen celebration.
 - **Hype** tab: snippets for face-offs, time-outs and stoppages. **Shuffle** (next to the tabs) plays a random Hype snippet, never the goal song and no repeats until every snippet has played.
 - **Volledige nummers** tab: full songs for warm-up and breaks.
 - Now-playing bar with **Uitfaden** (2.5 s fade) and **Stop**.

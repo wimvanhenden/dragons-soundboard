@@ -244,27 +244,36 @@ try { const saved = localStorage.getItem('lxd-tab'); if (saved && document.getEl
 
 /* =========================================================
    Score buttons: GOAL! (wij scoren) and TEGENGOAL (zij scoren)
-   Each picks a random song from its list, never the same one twice in a row.
+   Each list is shuffled when the app opens and played in that order. Once
+   every song has had a turn the list is reshuffled, and the first song of
+   the new round is never the one that just played.
    ========================================================= */
 const goalBtn = $('#goalBtn');
 const tegenBtn = $('#tegenBtn');
 
+function shuffled(list) {
+  const a = list.slice();
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
 function picker(list) {
-  let bag = [];
+  let queue = shuffled(list); // shuffled on load
   let last = null;
-  return () => {
+  const next = () => {
     if (list.length === 1) return list[0];
-    if (!bag.length) {
-      bag = list.slice();
-      for (let i = bag.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [bag[i], bag[j]] = [bag[j], bag[i]];
-      }
-      if (bag[0] === last) bag.push(bag.shift());
+    if (!queue.length) {
+      queue = shuffled(list);
+      if (queue[0] === last) queue.push(queue.shift());
     }
-    last = bag.shift();
+    last = queue.shift();
     return last;
   };
+  next.upcoming = () => queue.slice(); // for debugging: what's left this round
+  return next;
 }
 const pickGoal = picker(GOAL_LIST);
 const pickTegen = picker(TEGENGOAL_LIST);
@@ -553,4 +562,8 @@ refreshOffline();
 window.addEventListener('load', () => setTimeout(warmEssentials, 800));
 
 // Expose for debugging
-window.__lxd = { play, stop, fadeOut, goal, tegengoal, shuffleHype, get current() { return current; } };
+window.__lxd = {
+  play, stop, fadeOut, goal, tegengoal, shuffleHype,
+  get current() { return current; },
+  upcoming: () => ({ goal: pickGoal.upcoming(), tegengoal: pickTegen.upcoming(), hype: pickHype.upcoming() }),
+};
