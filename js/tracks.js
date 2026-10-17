@@ -62,7 +62,6 @@ export const HYPE = [
   s('Red Hot Chili Peppers', "Can't Stop", "Red Hot Chili Peppers - Can't Stop [Official Music Video].mp3"),
   s('The Black Eyed Peas', "Let's Get It Started", "The Black Eyed Peas - Let's Get It Started.mp3"),
   s('Walk the Moon', 'Shut Up and Dance', 'WALK THE MOON - Shut Up and Dance (Official Video).mp3'),
-  s('Years & Years', 'King', 'Years & Years - King (Official Video).mp3'),
 ];
 
 // Volledige nummers — opwarming & pauzes
@@ -94,6 +93,7 @@ export const FULL = [
   o('The Clash', 'I Fought the Law', 'The Clash - I Fought the Law (Official Video).mp3'),
   o('Willy Sommers', 'Laat de zon in je hart', 'Willy Sommers-Laat de zon in je hart 2008.mp3'),
   o('Wolfmother', 'Joker and the Thief', 'Wolfmother - Joker And The Thief (Audio).mp3'),
+  o('Years & Years', 'King', 'Years & Years - King (Official Video).mp3'),
   o('Zombie Nation', 'Kernkraft 400', 'Zombie Nation - Kernkraft 400.mp3'),
 ];
 
